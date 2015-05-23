@@ -79,8 +79,8 @@ function createDM(DM_data){
     $("#DM").append("<div id="+dm.id+"></div>");
     $(select).html(dm.text)
         .css({
-        "position":"fixed",
-        "float":"left",
+        "position":"relative",
+        "float":"auto",
         "left":win_Wid+"px",
         "font-size":20+"px",
         "color":dm.color,
