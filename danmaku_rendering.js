@@ -2,7 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-console.log('instant_message init');
+console.log('danmaku_rendering init');
 
-call_room_storage();
-call_danmaku_rendering();
+function call_danmaku_rendering() {
+	console.log('danmaku rendering get called.');
+}
