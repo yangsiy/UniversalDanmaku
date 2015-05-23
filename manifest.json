@@ -12,7 +12,7 @@
   },
   "content_scripts": [{  
          "matches": ["http://*/*","https://*/*"],   
-         "js": ["room_storage.js", "danmaku_rendering.js", "instant_message.js"],   
+         "js": ["room_storage.js", "danmaku_rendering.js", "instant_message.js","AV.realtime.js"],   
          "run_at": "document_start",  
          "all_frames": false   
   }],  
