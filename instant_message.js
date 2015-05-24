@@ -170,7 +170,7 @@ function randomColor()
 	switch(i)
 	{
 		case 1:
-		return 'yellow';
+		return 'orange';
 		break;
 		case 2:
 		return 'green';

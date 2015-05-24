@@ -8,10 +8,14 @@ DM_init();
 $(window).resize(function () {
     win_Hei = $(window).height();
     win_Wid = $(window).width();
+    console.log('fuck change:'+win_Wid);
     $("#enter").css({
         "margin-top":win_Hei-100+"px",
         "margin-left":win_Wid/2-175+"px"
     })
+    $("#DM").css({
+            "width":"98%",
+            });
 });
 
 
@@ -66,14 +70,18 @@ function test(){
         text:'测试弹幕'+mytime
     };
 
-var dm2 = createDM(data2);
-    dm2.show();
+    var dm2 = createDM(data2);
+    if(dm2 != false)
+    {
+        dm2.show();
+    }
     
 }
 
 
 function createDM(DM_data){
-    if(danmaku_is_on != true) return;
+    console.log(danmaku_is_on);
+    if(danmaku_is_on != true) return false;
     var dm = new Object();
     dm.id = DM_data.id;
     dm.color = DM_data.color;
