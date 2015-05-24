@@ -1,5 +1,8 @@
 var win_Hei= $(window).height();//窗口高
 var win_Wid= $(window).width();//窗口宽
+
+
+console.log('danmaku rendering init'+win_Wid);
 DM_init();
 
 //调整浏览器后重排元素
@@ -20,14 +23,14 @@ function DM_init() {
         fontcolor:'black',
         type:'left',
         };
-        
+
     $("body").css({
         "overflow":"hidden"
         })
     .append("<div id='DM'></div>");
-    $("#DM").html("测试幕布")
+    $("#DM").html("")
         .css({
-            "position":"relative",
+            "position":"absolute",
             "top":"0px",
             "left":"0px",
             "width":"100%",
@@ -55,6 +58,8 @@ function DM_init() {
 };
 
 function test(){
+
+    console.log('test init');
     var myDate = new Date();//时间种子
     var mytime=myDate.getTime(); 
     var data2 = {
@@ -62,6 +67,7 @@ function test(){
         color:'red',
         text:'测试弹幕'+mytime
     };
+
 var dm2 = createDM(data2);
     dm2.show();
     
@@ -75,8 +81,9 @@ function createDM(DM_data){
     dm.text = DM_data.text;
     //显示弹幕
     dm.show = function(){
+        console.log('ferferi');
     var select = "#"+dm.id;
-    $("#DM").append("<div id="+dm.id+"></div>");
+    $("#DM").append("<div id='"+dm.id+"'></div>");
     $(select).html(dm.text)
         .css({
         "position":"relative",
@@ -91,8 +98,10 @@ function createDM(DM_data){
         "white-space":"nowrap",
         "z-index":"900"
         })
-    .stop(true,false).animate({'left':-200+'px'},8000,"linear",
-        function(){$(select).remove()})
+    .stop(true,false).animate({'left':-1000+'px'},10000,"linear",
+        function(){
+            $(select).remove();
+        })
     };
     return dm;
 };
