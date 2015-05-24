@@ -23,10 +23,7 @@ function DM_init() {
         type:'left',
         };
 
-    $("body").css({
-        //"overflow":"hidden"
-        })
-    .append("<div id='DM' onselectstart='return false;'></div>");
+    $("body").append("<div id='DM' onselectstart='return false;'></div>");
     $("#DM").html("")
         .css({
             "pointer-events":"none",

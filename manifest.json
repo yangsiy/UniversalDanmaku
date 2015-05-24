@@ -13,7 +13,7 @@
   "content_scripts": [{  
          "matches": ["http://*/*","https://*/*"],   
          "js": ["AV.realtime.js", "av-core-mini-0.5.4.js", "jquery-2.1.3.min.js", "room_storage.js", "danmaku_rendering.js", "instant_message.js", "danmaku_switch.js"],
-         "run_at": "document_start",  
+         "run_at": "document_idle",  
          "all_frames": false   
   }],  
   "permissions": [
