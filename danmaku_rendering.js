@@ -30,13 +30,15 @@ function DM_init() {
     $("body").append("<div id='DM' onselectstart='return false;'></div>");
     $("#DM").html("")
         .css({
+            "overflow-x":"hide",
             "pointer-events":"none",
-            "-moz-user-select": "none",
-            "position":"absolute",
+            "-moz-user-select":"none",
+            "position":"fixed",
             "top":"0px",
             "left":"0px",
             "width":"98%",
-            "height":"500px"
+            "height":"500px",
+            "z-index":"99999"
             });
     
     //输入框
@@ -96,7 +98,7 @@ function createDM(DM_data){
         "position":"relative",
         "float":"auto",
         "left":win_Wid+"px",
-        "font-size":20+"px",
+        "font-size":25+"px",
         "color":dm.color,
         "margin-top":"10px",
         "margin-left":"30px",
@@ -106,9 +108,9 @@ function createDM(DM_data){
         "z-index":"99999"
         })
     .stop(true,false).animate({'left':-1000+'px'},10000,"linear",
-        function(){
+        setTimeout(function(){
             $(select).remove();
-        })
+        },15000))
     };
     return dm;
 };
