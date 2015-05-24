@@ -79,7 +79,7 @@ rt.on('open', function() {
             		console.log('获取房间的初始化数据', convOld.attr);
             		conv = convOld;
             		convOld.receive(function(data) {
-        				ReceiveMessage(data);
+        				ReceiveMsg(data);
     				});
         		} else {
             		console.log('你想获取的房间不存在');
@@ -104,7 +104,7 @@ rt.on('create', function(data) {
 
     // 当前 Conversation 接收到消息
     conv.receive(function(data) {
-        ReceiveMessage(data);
+        ReceiveMsg(data);
     });
 });
 
@@ -130,7 +130,7 @@ function sendMsg(msg){
     });
 }
 
-function ReceiveMessage(data) {
+function ReceiveMsg(data) {
 	console.log('当前 Conversation 收到消息：', data.msg.text)
 };
 
