@@ -6,13 +6,13 @@ console.log('instant_message init');
 
 // 模块互相调用的测试
 call_room_storage();
-call_danmaku_rendering();
 
 var url = window.location.href;
 var appId = '3v0yxbrcuatjjsplug51eou78dy77jsyrg63hdx9bytn2jmc';
 
 // 每个客户端自定义的 id
 var clientId = guid();
+var fontColor = "red";
 
 console.log('my client id is :'+clientId);
 // 如果想加入一个已有房间，可以传入 roomId
@@ -31,6 +31,8 @@ rt = AV.realtime({
     // 是否开启服务器端认证
     // auth: authFun
 });
+
+fontColor = randomColor();
 
 // 当前 SDK 版本
 console.log('欢迎使用 LeanCloud 实时通信，当前 SDK 版本是 ' + AV.realtime.version);
@@ -116,9 +118,19 @@ rt.on('reuse', function() {
 // 监听所有用户加入的情况
 rt.on('join', function(data) {
     console.log('有用户加入某个当前用户在的 Conversation：', data.initBy);
-    sendMsg('fuck');
+    //sendMsg('fuck');
 });
 
+document.onkeydown=function(event){
+var e = event || window.event || arguments.callee.caller.arguments[0];
+	if(e && e.keyCode==113){ 
+		// 按 F2
+		msg = prompt("请输入弹幕:","");
+		console.log('your fucking input is :'+msg);
+		sendMsg(msg);
+		//要做的事情
+	}
+}; 
 
 function sendMsg(msg){
     conv.send({
@@ -127,12 +139,60 @@ function sendMsg(msg){
         type: 'text'
     }, function(data) {
         console.log('发送的消息服务端已收到：', msg);
+        var myDate = new Date();//时间种子
+    	var mytime=myDate.getTime(); 
+    	var data2 = {
+        	id:mytime,
+        	color:fontColor,
+        	text:msg
+    	};
+    	var dm2 = createDM(data2);
+    	dm2.show();
     });
 }
 
 function ReceiveMsg(data) {
-	console.log('当前 Conversation 收到消息：', data.msg.text)
+	console.log('当前 Conversation 收到消息：', data);
+	var myDate = new Date();//时间种子
+    var mytime=myDate.getTime(); 
+    var data2 = {
+        id:mytime,
+        color:randomColor(),
+        text:data.msg.text
+    };
+    var dm2 = createDM(data2);
+    dm2.show();
 };
+
+function randomColor()
+{
+	var i = rd();
+	switch(i)
+	{
+		case 1:
+		return 'yellow';
+		break;
+		case 2:
+		return 'green';
+		break;
+		case 3:
+		return 'red';
+		break;
+	    case 4:
+	    return 'black';
+		break;
+	    case 5:
+	    return 'purple';
+		break;
+		default:
+		return 'blue';
+		break;
+	}
+}
+
+function rd(){
+    return Math.floor(Math.random()*10+1);
+}
 
 function S4() {
    return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
