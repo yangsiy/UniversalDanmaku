@@ -1,8 +1,8 @@
-var win_Hei= $(window).height();//´°¿Ú¸ß
-var win_Wid= $(window).width();//´°¿Ú¿í
+var win_Hei= $(window).height();//çª—å£é«˜
+var win_Wid= $(window).width();//çª—å£å®½
 DM_init();
 
-//µ÷Õûä¯ÀÀÆ÷ºóÖØÅÅÔªËØ
+//è°ƒæ•´æµè§ˆå™¨åé‡æ’å…ƒç´ 
 $(window).resize(function () {
     win_Hei = $(window).height();
     win_Wid = $(window).width();
@@ -13,7 +13,7 @@ $(window).resize(function () {
 });
 
 
-//³õÊ¼»¯Ä»²¼
+//åˆå§‹åŒ–å¹•å¸ƒ
 function DM_init() {
     var init = {
         fontsize:'20px',
@@ -25,7 +25,7 @@ function DM_init() {
         "overflow":"hidden"
         })
     .append("<div id='DM'></div>");
-    $("#DM").html("²âÊÔÄ»²¼")
+    $("#DM").html("æµ‹è¯•å¹•å¸ƒ")
         .css({
             "position":"relative",
             "top":"0px",
@@ -34,7 +34,7 @@ function DM_init() {
             "height":"500px"
             });
     
-    //ÊäÈë¿ò
+    //è¾“å…¥æ¡†
     $("body").append("<div id='IN'></div>");
     $("#IN").append("<div id='enter'></div>");
     $("#enter").css({
@@ -55,12 +55,12 @@ function DM_init() {
 };
 
 function test(){
-    var myDate = new Date();//Ê±¼äÖÖ×Ó
+    var myDate = new Date();//æ—¶é—´ç§å­
     var mytime=myDate.getTime(); 
     var data2 = {
         id:mytime,
         color:'red',
-        text:'²âÊÔµ¯Ä»'+mytime
+        text:'æµ‹è¯•å¼¹å¹•'+mytime
     };
 var dm2 = createDM(data2);
     dm2.show();
@@ -73,7 +73,7 @@ function createDM(DM_data){
     dm.id = DM_data.id;
     dm.color = DM_data.color;
     dm.text = DM_data.text;
-    //ÏÔÊ¾µ¯Ä»
+    //æ˜¾ç¤ºå¼¹å¹•
     dm.show = function(){
     var select = "#"+dm.id;
     $("#DM").append("<div id="+dm.id+"></div>");
