@@ -14,6 +14,7 @@ var appId = '3v0yxbrcuatjjsplug51eou78dy77jsyrg63hdx9bytn2jmc';
 // 每个客户端自定义的 id
 var clientId = guid();
 
+console.log('my client id is :'+clientId);
 // 如果想加入一个已有房间，可以传入 roomId
 var roomId;
 var rt;
@@ -37,6 +38,55 @@ console.log('欢迎使用 LeanCloud 实时通信，当前 SDK 版本是 ' + AV.r
 // 实时通信服务连接成功
 rt.on('open', function() {
     console.log('实时通信服务建立成功！');
+    findRoomId(url,function(result){
+    	console.log('call back get result:'+result);
+    	if(result == 'none')
+    	{
+	    		conv = rt.conv({
+	            name: url,
+
+	            transient: false,
+
+	            attr: {
+	            }
+	        }, function(data) {
+	            if (data) {
+	            	roomId = data.id;
+	                console.log('新的群组创建成功：', data.id);
+	                setRoomId(url,roomId,function(result){
+	                	console.log('storage get result:'+result);
+	                });
+	            }
+	        });
+    	}
+    	else if(result == 'failed')
+    	{
+    		console.log('call back get failed');
+    	}
+    	else
+    	{
+    		roomId = result;
+    		rt.conv(roomId, function(obj) {
+        
+        		// 判断这个 conv 是否在服务器端存在
+        		if (obj) {
+            		console.log('已经获取已有房间的实例');
+            		convOld = obj;
+            		convOld.join(function(data) {
+        				console.log('加入现有群组。。当前用户成功加入 Conversation');
+    				});
+            		console.log('房间名字： ', convOld.name);
+            		console.log('获取房间的初始化数据', convOld.attr);
+            		conv = convOld;
+            		convOld.receive(function(data) {
+        				ReceiveMessage(data);
+    				});
+        		} else {
+            		console.log('你想获取的房间不存在');
+        		}
+    		});
+    	}
+    });
 });
 
 // 当聊天断开时触发
@@ -52,11 +102,6 @@ rt.on('create', function(data) {
         console.log('当前用户成功加入 Conversation');
     });
 
-    // 当前用户离开这个 Conversation 
-    // conv.leave(function(data) {
-    //     console.log('当前用户成功离开 Conversation');
-    // });
-
     // 当前 Conversation 接收到消息
     conv.receive(function(data) {
         ReceiveMessage(data);
@@ -68,8 +113,25 @@ rt.on('reuse', function() {
     console.log('正在重新连接。。。');
 });
 
+// 监听所有用户加入的情况
+rt.on('join', function(data) {
+    console.log('有用户加入某个当前用户在的 Conversation：', data.initBy);
+    sendMsg('fuck');
+});
+
+
+function sendMsg(msg){
+    conv.send({
+        text: msg 
+    },{
+        type: 'text'
+    }, function(data) {
+        console.log('发送的消息服务端已收到：', msg);
+    });
+}
+
 function ReceiveMessage(data) {
-	console.log('当前 Conversation 收到消息：', data)
+	console.log('当前 Conversation 收到消息：', data.msg.text)
 };
 
 function S4() {
