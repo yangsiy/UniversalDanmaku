@@ -73,6 +73,7 @@ var dm2 = createDM(data2);
 
 
 function createDM(DM_data){
+    if(danmaku_is_on != true) return;
     var dm = new Object();
     dm.id = DM_data.id;
     dm.color = DM_data.color;
