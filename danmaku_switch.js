@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-var danmaku_is_on = null;
+var danmaku_is_on = true;
 
 function call_danmaku_switch() {
 	console.log("danmaku switch get called.");
