@@ -1,6 +1,5 @@
-var win_Hei= $(window).height();//窗口高
 var win_Wid= $(window).width();//窗口宽
-
+var win_Hei= $(window).height();//窗口宽
 
 console.log('danmaku rendering init'+win_Wid);
 DM_init();
@@ -25,15 +24,17 @@ function DM_init() {
         };
 
     $("body").css({
-        "overflow":"hidden"
+        //"overflow":"hidden"
         })
-    .append("<div id='DM'></div>");
+    .append("<div id='DM' onselectstart='return false;'></div>");
     $("#DM").html("")
         .css({
+            "pointer-events":"none",
+            "-moz-user-select": "none",
             "position":"absolute",
             "top":"0px",
             "left":"0px",
-            "width":"100%",
+            "width":"98%",
             "height":"500px"
             });
     
@@ -44,7 +45,7 @@ function DM_init() {
         "height":"100px",
         "width":"350px",
         "margin":"10px",
-        "background":"azure",
+        "background":"black",
         "bottom":"0px",
         "text-align":"center",
         "margin-top":win_Hei-100+"px",
@@ -96,7 +97,7 @@ function createDM(DM_data){
         "width":"60px",
         "overflow":"visible",
         "white-space":"nowrap",
-        "z-index":"900"
+        "z-index":"99999"
         })
     .stop(true,false).animate({'left':-1000+'px'},10000,"linear",
         function(){
