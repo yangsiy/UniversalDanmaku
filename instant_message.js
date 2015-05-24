@@ -12,6 +12,7 @@ var appId = '3v0yxbrcuatjjsplug51eou78dy77jsyrg63hdx9bytn2jmc';
 
 // 每个客户端自定义的 id
 var clientId = guid();
+var fontColor = "red";
 
 console.log('my client id is :'+clientId);
 // 如果想加入一个已有房间，可以传入 roomId
@@ -30,6 +31,8 @@ rt = AV.realtime({
     // 是否开启服务器端认证
     // auth: authFun
 });
+
+fontColor = randomColor();
 
 // 当前 SDK 版本
 console.log('欢迎使用 LeanCloud 实时通信，当前 SDK 版本是 ' + AV.realtime.version);
@@ -140,7 +143,7 @@ function sendMsg(msg){
     	var mytime=myDate.getTime(); 
     	var data2 = {
         	id:mytime,
-        	color:'red',
+        	color:fontColor,
         	text:msg
     	};
     	var dm2 = createDM(data2);
@@ -154,12 +157,42 @@ function ReceiveMsg(data) {
     var mytime=myDate.getTime(); 
     var data2 = {
         id:mytime,
-        color:'red',
+        color:randomColor(),
         text:data.msg.text
     };
     var dm2 = createDM(data2);
     dm2.show();
 };
+
+function randomColor()
+{
+	var i = rd();
+	switch(i)
+	{
+		case 1:
+		return 'yellow';
+		break;
+		case 2:
+		return 'green';
+		break;
+		case 3:
+		return 'red';
+		break;
+	    case 4:
+	    return 'black';
+		break;
+	    case 5:
+	    return 'purple';
+		break;
+		default:
+		return 'blue';
+		break;
+	}
+}
+
+function rd(){
+    return Math.floor(Math.random()*10+1);
+}
 
 function S4() {
    return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
